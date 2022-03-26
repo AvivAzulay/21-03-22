@@ -2,7 +2,7 @@
   "name": "mernstack",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://AvivAzulay.github.io/21-03-22",
+  "homepage": "https://AvivAzulay.github.io/21-03-22",
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",

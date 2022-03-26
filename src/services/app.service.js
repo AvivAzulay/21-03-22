@@ -32,7 +32,7 @@ async function getForcast(filterBy) {
 
         } else {
             const { geoLocation: { latitude, longitude } } = filterBy
-            resLocation = await axios.get(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search.json?q=${latitude},${longitude}&apikey=${API_KEY}`);
+            resLocation = await axios.get(`${BASE_URL}locations/v1/cities/geoposition/search.json?q=${latitude},${longitude}&apikey=${API_KEY}`);
             key = resLocation?.data?.Key
             dataLocation = resLocation.data
         }

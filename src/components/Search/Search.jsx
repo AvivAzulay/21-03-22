@@ -1,0 +1,74 @@
+import './Search.scss'
+import { loadForcast, setError } from '../../store/actions/app.actions'
+import { utilService } from '../../services/util.service'
+import { appService } from '../../services/app.service'
+import SearchIcon from '@mui/icons-material/Search';
+import { useDispatch } from 'react-redux'
+import debounce from 'lodash.debounce'
+import { useState } from 'react';
+
+export const Search = ({ error }) => {
+
+    const [searchResults, setSearchResults] = useState([])
+    const dispatch = useDispatch()
+
+    const onAutoCompleteSearch = async ({ target }) => {
+        try {
+            const keyword = target?.value
+            const isEnglish = utilService.isEnglish(keyword)
+            if (!isEnglish) return;
+            const result = await appService.getAutoCompleteSearch(keyword)
+            setSearchResults(result)
+        }
+        catch (err) {
+            setError(err)
+        }
+
+    }
+
+    const setNewForcast = async (city) => {
+        try {
+            if (error) dispatch(setError(null))
+            dispatch(loadForcast({ keyword: city }));
+            setSearchResults([])
+        }
+        catch (err) {
+            setError(err)
+        }
+    }
+
+    const searchNewForcast = (ev) => {
+        const { target } = ev
+        if (target.value.length < 3) setSearchResults([])
+        if (ev.code === 'Enter' && target.value.length > 0) {
+            setNewForcast(target.value)
+            autoCompleteDebounced.cancel()
+        }
+    }
+
+    const onAutoComplete = (ev) => {
+        const { target } = ev
+        if (target.value.length < 3) return
+        autoCompleteDebounced(ev)
+    }
+
+    const autoCompleteDebounced = debounce(onAutoCompleteSearch, 800)
+
+    return (
+        <div className="search-container">
+            <input className={searchResults.length > 0 ? "search open" : "search"} onBlur={() => setSearchResults([])} onKeyDown={searchNewForcast} onChange={onAutoComplete} placeholder="Search for a city" type="text" />
+            <SearchIcon />
+
+            {searchResults.length > 0 &&
+                <ul className="search-results">
+                    {searchResults.map(result => {
+                        const { countryCode, key, city } = result
+                        return (
+                            <li onClick={() => setNewForcast(city)} key={key}> {countryCode} - {city}</li>
+                        )
+                    })}
+                </ul>
+            }
+        </div>
+    )
+}

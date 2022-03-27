@@ -83,7 +83,7 @@ export const Favorites = () => {
                 const { day, night, temperature: { maximum, minimum } } = fiveDaysForcast[0]
                 return (
                     <div className="card" key={idx}>
-                        <Link to="/" onClick={() => onUpdateForcast(idx)} target="_blank">
+                        <Link to="/" onClick={() => onUpdateForcast(idx)}>
                             <img src={utilService.getLogoIconUrl(day, night)} alt="" />
                             <h3>{city}</h3>
                             <span className="degree-container">

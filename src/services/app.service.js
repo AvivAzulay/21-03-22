@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { utilService } from './util.service'
-const API_KEY = 'daxygcBrSh8tXk4hBVsk4u1ERu6JNSMA'
+const API_KEY = 'SElSSUY2anGKSqwM3J7MWFNbNOEyOMm8'
 const BASE_URL = 'https://dataservice.accuweather.com/'
 
 

@@ -55,8 +55,9 @@ export const Search = ({ error }) => {
     const autoCompleteDebounced = debounce(onAutoCompleteSearch, 800)
 
     return (
-        <div className="search-container">
-            <input className={searchResults.length > 0 ? "search open" : "search"} onBlur={() => setSearchResults([])} onKeyDown={searchNewForcast} onChange={onAutoComplete} placeholder="Search for a city" type="text" />
+        <div className="search-container" >
+            <input className={`search${searchResults.length > 0 ? " open" : ""}`} onKeyDown={searchNewForcast} onChange={onAutoComplete} placeholder="Search for a city" type="text" />
+            <div className="screen" onClick={() => { setSearchResults([]) }}></div>
             <SearchIcon />
 
             {searchResults.length > 0 &&
@@ -64,7 +65,7 @@ export const Search = ({ error }) => {
                     {searchResults.map(result => {
                         const { countryCode, key, city } = result
                         return (
-                            <li onClick={() => setNewForcast(city)} key={key}> {countryCode} - {city}</li>
+                            <li onClick={(ev) => setNewForcast(city, ev)} key={key}> {countryCode} - {city}</li>
                         )
                     })}
                 </ul>

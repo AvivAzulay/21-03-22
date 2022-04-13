@@ -18,8 +18,7 @@ function convertDegrees(value) {
 function getLogoIconUrl(day, night) {
     let value = day.icon
     let time = new Date().getHours()
-
-    if (18 < time <= 6) value = night.icon
+    if (19 < time || time <= 6) value = night.icon
     if (value < 10) value = `0${value}`
 
     return `https://developer.accuweather.com/sites/default/files/${value}-s.png`

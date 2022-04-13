@@ -1,15 +1,17 @@
-import './Search.scss'
+import { useDispatch } from 'react-redux'
+import { useState } from 'react';
 import { loadForcast, setError } from '../../store/actions/app.actions'
 import { utilService } from '../../services/util.service'
 import { appService } from '../../services/app.service'
 import SearchIcon from '@mui/icons-material/Search';
-import { useDispatch } from 'react-redux'
 import debounce from 'lodash.debounce'
-import { useState } from 'react';
+import './Search.scss'
 
 export const Search = ({ error }) => {
 
     const [searchResults, setSearchResults] = useState([])
+    const [searchInput, setSearchInput] = useState('')
+
     const dispatch = useDispatch()
 
     const onAutoCompleteSearch = async ({ target }) => {
@@ -28,6 +30,7 @@ export const Search = ({ error }) => {
 
     const setNewForcast = async (city) => {
         try {
+            setSearchInput(city)
             if (error) dispatch(setError(null))
             dispatch(loadForcast({ keyword: city }));
             setSearchResults([])
@@ -52,7 +55,7 @@ export const Search = ({ error }) => {
         autoCompleteDebounced(ev)
     }
 
-    const autoCompleteDebounced = debounce(onAutoCompleteSearch, 800)
+    const autoCompleteDebounced = debounce(onAutoCompleteSearch, 400)
 
     return (
         <div className="search-container" >

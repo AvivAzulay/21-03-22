@@ -1,6 +1,4 @@
 .header {
-    // background: linear-gradient(90deg, rgba(0, 124, 173, 1) 0%, rgba(0, 152, 211, 1) 100%);
-    // background: linear-gradient(to left, #f46b45, #eea849);
     background: linear-gradient(90deg, #6bd7e8 0%, #29b7d6 100%);
     color: #e3fdfd;
     height: 80px;
@@ -20,6 +18,12 @@
         z-index: 1;
         a {
             font-size: 20px;
+            &.home-tab {
+                color: #00ff9d;
+            }
+            &.favorites-tab {
+                color: #00ff9d;
+            }
         }
         a:not(:last-of-type) {
             margin-right: 30px;

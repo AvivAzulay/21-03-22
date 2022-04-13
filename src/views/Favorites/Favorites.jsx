@@ -1,12 +1,12 @@
-import './Favorites.scss'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 import { onSaveFavorites, updateIsFavorite, updateForcast, setError } from '../../store/actions/app.actions'
 import useLocalStorage from '../../services/customHooks/useLocalStorage'
 import { utilService } from '../../services/util.service'
 import { appService } from '../../services/app.service'
-import { useDispatch, useSelector } from 'react-redux'
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import './Favorites.scss'
 
 export const Favorites = () => {
     const { KEY } = utilService

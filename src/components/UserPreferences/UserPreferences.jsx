@@ -1,9 +1,11 @@
-import './UserPreferences.scss'
-import { updateIsCelsius, updateIsDarkMode } from '../../store/actions/app.actions';
 import { useDispatch, useSelector } from 'react-redux';
-import { Stack, Typography } from '@mui/material'
-import { styled } from '@mui/material/styles';
-import Switch from '@mui/material/Switch';
+import { updateIsCelsius, updateIsDarkMode } from '../../store/actions/app.actions';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormLabel from '@mui/material/FormLabel'
+import Radio from '@mui/material/Radio';
+import './UserPreferences.scss'
 
 export const UserPreferences = () => {
 
@@ -16,53 +18,22 @@ export const UserPreferences = () => {
 
     return (
         <div className="preferences">
-            <Stack direction="row" spacing={1} alignItems="center">
-                <Typography>{isCelsius ? '°C' : '°F'}</Typography>
-                <AntSwitch onChange={toggleAppDegrees} defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
-            </Stack>
+
+            <FormControl>
+                <FormLabel id="preferences-degree" >Degree type</FormLabel>
+                <RadioGroup
+                    row
+                    aria-labelledby="preferences-degree"
+                    defaultValue={isCelsius ? "°C" : "°F"}
+                    name="preferences-degree-btns"
+                    onChange={toggleAppDegrees}
+                >
+                    <FormControlLabel value="°C" control={<Radio />} label="°C" />
+                    <FormControlLabel value="°F" control={<Radio />} label="°F'" />
+                </RadioGroup>
+            </FormControl>
+
+
         </div>
     )
 }
-
-
-const AntSwitch = styled(Switch)(({ theme }) => ({
-    width: 28,
-    height: 16,
-    padding: 0,
-    display: 'flex',
-    '&:active': {
-        '& .MuiSwitch-thumb': {
-            width: 15,
-        },
-        '& .MuiSwitch-switchBase.Mui-checked': {
-            transform: 'translateX(9px)',
-        },
-    },
-    '& .MuiSwitch-switchBase': {
-        padding: 2,
-        '&.Mui-checked': {
-            transform: 'translateX(12px)',
-            color: '#fff',
-            '& + .MuiSwitch-track': {
-                opacity: 1,
-                backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
-            },
-        },
-    },
-    '& .MuiSwitch-thumb': {
-        boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
-        width: 12,
-        height: 12,
-        borderRadius: 6,
-        transition: theme.transitions.create(['width'], {
-            duration: 200,
-        }),
-    },
-    '& .MuiSwitch-track': {
-        borderRadius: 16 / 2,
-        opacity: 1,
-        backgroundColor:
-            theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
-        boxSizing: 'border-box',
-    },
-}));

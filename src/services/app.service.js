@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { utilService } from './util.service'
-const API_KEY = 'SElSSUY2anGKSqwM3J7MWFNbNOEyOMm8'
+const API_KEY = 'WlWVysnCAPvAPxHS9Mk20BDOSlwAhqOo'
 const BASE_URL = 'https://dataservice.accuweather.com/'
 
 
@@ -17,7 +17,7 @@ async function getForcast(filterBy) {
                 return Promise.reject("Please use English letters only!")
             }
         }
-        if (!filterBy?.keyword && !filterBy?.geoLocation) filterBy.keyword = 'Tel Aviv'
+        if (!filterBy?.keyword && !filterBy?.geoLocation) filterBy = { keyword: 'Tel Aviv' }
 
         let dataLocation
         let dataForcast
@@ -37,7 +37,7 @@ async function getForcast(filterBy) {
             dataLocation = resLocation.data
         }
 
-        if (!key) return Promise.reject('Location wasnt found, please try again!')
+        if (!key) return Promise.reject('Location wasn\'\t found, please try again!')
 
         const resForcast = await axios.get(`${BASE_URL}forecasts/v1/daily/5day/${key}?apikey=${API_KEY}`)
         if (!resForcast?.data) return Promise.reject('Location wasnt found, please try again!')
@@ -47,6 +47,7 @@ async function getForcast(filterBy) {
         return res
 
     } catch (err) {
+        console.error(err);
         throw err
     }
 }

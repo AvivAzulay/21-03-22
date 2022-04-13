@@ -1,9 +1,10 @@
 .favorites {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: auto;
     justify-items: center;
-    grid-gap: 10px;
+    grid-gap: 25px;
+    margin: 0 30px;
     .card {
         a {
             position: relative;
@@ -25,6 +26,7 @@
             .category {
                 font-size: 20px;
                 font-family: PoppinsMedium;
+                text-transform: capitalize;
             }
             img {
                 width: 130px;
@@ -45,21 +47,26 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1150px) {
     .favorites {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 930px) {
     .favorites {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 680px) {
     .favorites {
         grid-template-columns: repeat(2, 1fr);
+        .card {
+            svg {
+                visibility: visible;
+            }
+        }
     }
 }
 

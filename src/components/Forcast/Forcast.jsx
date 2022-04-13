@@ -1,10 +1,10 @@
-import './Forcast.scss'
+import { useDispatch, useSelector } from 'react-redux';
 import useLocalStorage from '../../services/customHooks/useLocalStorage';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { updateIsFavorite } from '../../store/actions/app.actions';
 import { utilService } from '../../services/util.service';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useDispatch, useSelector } from 'react-redux';
+import './Forcast.scss'
 
 export const Forcast = () => {
     const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday"];
@@ -42,7 +42,7 @@ export const Forcast = () => {
                     <div className="favorite" onClick={onToggleFavorite}>
                         {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                         <span>
-                            {isFavorite ? "Remove to favorite" : "Add to favorites"}
+                            {isFavorite ? "Remove from favorite" : "Add to favorites"}
                         </span>
                         {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                     </div>
@@ -50,7 +50,7 @@ export const Forcast = () => {
             </div>
 
             <div className="forcast-middle">
-                <h2>Weekly forecast: <span>{category}</span></h2>
+                {category && <h2>Weekly forecast: <span>{category}</span></h2>}
                 <span className="forcast-text">{text}</span>
             </div>
 
